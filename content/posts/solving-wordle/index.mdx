@@ -6,6 +6,7 @@ tags:
   - puzzle
 ---
 ## Preparing the word list
+The list of English words "words_alpha" comes from [here](https://github.com/dwyl/english-words)
 ```python
 
 #### Creating the word list
@@ -83,5 +84,14 @@ for i in range(6):
     # input 0 for Gray, 1 for Yellow, 2 for Green e.g. '00120'
     feedback = list(input())
     Vwords = filterWords(Vwords, feedback)
+
+#############################################################
+## sanes : 00210
+## conte : 10202
+## pence : 01222 This is a problem, as the app returns 00222
+## bunce : 00222
+## mince : 02222
+## wince
+#############################################################
 
 ```
