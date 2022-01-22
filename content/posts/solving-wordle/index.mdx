@@ -1,0 +1,39 @@
+---
+title: Wordle Solver in Python
+date: 2022-01-22
+tags:
+  - programming
+  - puzzle
+---
+
+```python
+
+#### Creating Vword list
+
+fin = open('/home/tejas/Documents/Wordle/rankedVwords.txt', 'r')
+Vwords = fin.readlines()
+Vwords = [line.strip() for line in Vwords]
+fin.close()
+
+
+#### Filter the word list
+def filterWords (_Vwords, _feedback):
+    _output = _Vwords[0]
+    for f in range(5):
+        if _feedback[f] == '0': #if gray
+            _Vwords = [w for w in _Vwords if _output[f] not in w]
+        if _feedback[f] == '2': #if green
+            _Vwords = [w for w in _Vwords if _output[f] == w[f]]
+        if _feedback[f] == '1': #if yellow
+            _Vwords = [w for w in _Vwords if _output[f] in w and _output[f] != w[f]]
+    return _Vwords
+
+
+#### Play loop
+for i in range(6):
+    print(Vwords[0])
+    # input 0 for Gray, 1 for Yellow, 2 for Green e.g. '00120'
+    feedback = list(input())
+    Vwords = filterWords(Vwords, feedback)
+
+```
