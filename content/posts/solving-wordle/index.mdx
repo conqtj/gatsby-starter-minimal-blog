@@ -5,7 +5,55 @@ tags:
   - programming
   - puzzle
 ---
+## Preparing the word list
+```python
 
+#### Creating the word list
+
+fin = open('/home/$USER/Downloads/words_alpha.txt', 'r')
+allWords = fin.readlines()
+fin.close()
+
+#the words contain '\n' at the end
+Vwords = [l.strip() for l in allWords if len(l)==6]
+
+
+#### Giving Scores to alphabets
+
+alphabetScore = {}
+#going over every alphabet
+for i in range(ord('a'), ord('z')+1):
+    a = []
+    #times the character appeared at x location in all the words
+    for j in range(5):
+        a.append([word[j] for word in Vwords].count(chr(i)))
+    alphabetScore[chr(i)] = a
+    
+
+#### Tallying the scores for words and sorting
+
+wordScore = {}
+for word in Vwords:
+    wsum = 0 
+    for x in range(5):
+        wsum += alphabetScore[word[x]][x]
+    wordScore[word] = wsum
+    
+rankedVwords = sorted(wordScore.items(),
+                      key = lambda kv: kv[1],
+                      reverse = True)
+
+
+#### Make new file with ranked words
+
+fout = open('/home/$USER/Documents/Wordle/rankedVwords.txt', 'w')
+for t in rankedVwords:
+    fout.write(t[0])
+    fout.write('\n')
+
+```
+
+## Playing Wordle
 ```python
 
 #### Creating Vword list
